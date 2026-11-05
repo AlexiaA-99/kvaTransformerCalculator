@@ -1,0 +1,1108 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, follow"><title>Transformer Calculator | Sunbelt Solomon</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><style>#tcalc{box-sizing:border-box;width:100%;-webkit-text-size-adjust:100%;--tc-navy:#141B4D;--tc-cobalt:#0047BB;--tc-cobalt-dk:#003A99;--tc-lblue:#738CC0;--tc-deep:#01117E;--tc-orange:#F16723;--tc-ink:#030516;
+  --tc-glass:rgba(255,255,255,.10);--tc-glass-2:rgba(255,255,255,.16);--tc-edge:rgba(255,255,255,.26);--tc-text:#fff;--tc-muted:rgba(255,255,255,.74);
+  position:relative;overflow:hidden;overflow:clip;isolation:isolate;max-width:880px;margin:32px auto;padding:40px;border-radius:24px;
+  font-family:"DM Sans",Arial,Helvetica,sans-serif;font-size:16px;line-height:1.55;color:var(--tc-text);
+  background:linear-gradient(135deg,var(--tc-navy) 0%,var(--tc-deep) 48%,var(--tc-cobalt) 100%);box-shadow:0 24px 60px rgba(3,5,22,.35)}
+#tcalc *{box-sizing:border-box}
+#tcalc button,#tcalc input,#tcalc label,#tcalc a{text-shadow:none;text-transform:none;letter-spacing:normal;min-height:0;min-width:0;max-width:none;float:none}
+#tcalc button{width:auto;height:auto;line-height:1.3;white-space:normal;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
+#tcalc button:hover,#tcalc button:focus,#tcalc a:hover{text-decoration:none;opacity:1;transform:none}
+#tcalc p,#tcalc ul,#tcalc ol,#tcalc li,#tcalc h2,#tcalc h3,#tcalc table{max-width:none}
+#tcalc ul,#tcalc li{list-style:none}
+#tcalc svg{display:inline-block;max-width:none;vertical-align:middle}
+#tcalc .tc-blob{position:absolute;border-radius:50%;filter:blur(70px);z-index:-1;pointer-events:none}
+#tcalc .tc-b1{width:380px;height:380px;background:#3d7bff;opacity:.55;top:-120px;right:-80px}
+#tcalc .tc-b2{width:320px;height:320px;background:var(--tc-lblue);opacity:.45;bottom:-120px;left:-90px}
+#tcalc .tc-b3{width:180px;height:180px;background:var(--tc-orange);opacity:.22;top:38%;left:55%}
+#tcalc .tc-glass{position:relative;background:var(--tc-glass);border:1px solid var(--tc-edge);border-radius:18px;
+  -webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 30px rgba(3,5,22,.22)}
+#tcalc .tc-glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(160deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 42%)}
+#tcalc .tc-eyebrow{display:flex;align-items:center;gap:12px;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--tc-muted);margin:0 0 10px}
+#tcalc .tc-wordmark{font-family:"DM Sans",Arial,Helvetica,sans-serif;font-size:18px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;line-height:1}
+#tcalc .tc-icon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;color:var(--tc-orange);background:rgba(255,255,255,.1);border:1px solid var(--tc-edge);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+#tcalc .tc-icon svg{width:20px;height:20px}
+#tcalc .tc-title{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:56px;font-size:clamp(32px,10cqi,56px);line-height:1;letter-spacing:.01em;margin:0 0 26px;color:#fff;text-transform:uppercase}
+#tcalc .tc-inputs{padding:24px;z-index:5}
+#tcalc .tc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;position:relative}
+#tcalc .tc-field{display:flex;flex-direction:column;gap:7px;margin:0}
+#tcalc .tc-field[hidden]{display:none}
+#tcalc .tc-full{grid-column:1 / -1}
+#tcalc label,#tcalc .tc-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tc-muted);margin:0}
+#tcalc .tc-hint{font-weight:500;letter-spacing:0;text-transform:none;opacity:.8}
+#tcalc input[type="number"],#tcalc input[type="text"],#tcalc input[type="email"],#tcalc select{width:100%;height:48px;padding:0 14px;font:inherit;font-size:16px;font-weight:500;color:#fff;
+  background:rgba(3,5,22,.28);border:1px solid rgba(255,255,255,.22);border-radius:10px;margin:0;box-shadow:inset 0 1px 2px rgba(3,5,22,.3);
+  -webkit-appearance:none;appearance:none;transition:border-color .16s,box-shadow .16s}
+#tcalc input[type="number"]{-moz-appearance:textfield}
+#tcalc input::-webkit-outer-spin-button,#tcalc input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#tcalc input::placeholder{color:rgba(255,255,255,.45)}
+#tcalc .tc-native{position:absolute !important;width:1px !important;height:1px !important;opacity:0;pointer-events:none;overflow:hidden}
+#tcalc .tc-dd{position:relative}
+#tcalc .tc-dd.tc-open{z-index:30}
+#tcalc .tc-dd-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;height:48px;padding:0 14px;margin:0;font:inherit;font-size:16px;font-weight:500;
+  color:#fff;text-align:left;text-transform:none;letter-spacing:0;cursor:pointer;background:rgba(3,5,22,.28);border:1px solid rgba(255,255,255,.22);border-radius:10px;
+  box-shadow:inset 0 1px 2px rgba(3,5,22,.3);transition:border-color .16s,box-shadow .16s,background .16s}
+#tcalc .tc-dd-btn:hover{background:rgba(3,5,22,.36)}
+#tcalc .tc-dd-btn:focus{outline:none;border-color:#fff;box-shadow:0 0 0 3px rgba(115,140,192,.55)}
+#tcalc .tc-chev{flex:0 0 18px;width:18px;height:18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .2s cubic-bezier(.2,0,0,1)}
+#tcalc .tc-open .tc-chev{transform:rotate(180deg)}
+#tcalc .tc-menu{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:40;display:none;flex-direction:column;gap:2px;max-height:272px;overflow-y:auto;margin:0;padding:6px;list-style:none;
+  border-radius:14px;border:1px solid rgba(255,255,255,.95);
+  background:linear-gradient(160deg,#FFFFFF 0%,#FBFCFE 50%,#F1F5FB 100%);
+  box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(20,27,77,.04),0 0 0 1px rgba(20,27,77,.06),0 18px 44px rgba(3,5,22,.38);
+  scrollbar-width:thin;scrollbar-color:rgba(20,27,77,.25) transparent}
+#tcalc .tc-menu::-webkit-scrollbar{width:8px}
+#tcalc .tc-menu::-webkit-scrollbar-thumb{background:rgba(20,27,77,.22);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+#tcalc .tc-open .tc-menu{display:flex;animation:tcmenu .16s cubic-bezier(.2,0,0,1)}
+@keyframes tcmenu{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+#tcalc .tc-opt{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:0 0 auto;margin:0;padding:11px 12px;min-height:44px;border-radius:10px;color:var(--tc-navy);font-size:15px;font-weight:500;line-height:1.3;cursor:pointer;transition:background .14s,color .14s;
+  font-variant-numeric:tabular-nums}
+#tcalc .tc-opt:hover,#tcalc .tc-opt.tc-active{background:#EDF2FB;color:var(--tc-cobalt)}
+#tcalc .tc-opt[aria-selected="true"]{background:var(--tc-cobalt);color:#fff;font-weight:700;box-shadow:0 4px 14px rgba(0,71,187,.35),inset 0 1px 0 rgba(255,255,255,.3)}
+#tcalc .tc-opt[aria-selected="true"]::after{content:"";width:14px;height:14px;flex:0 0 14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat}
+#tcalc .tc-menu-head{flex:0 0 auto;padding:6px 12px 8px;margin:0 0 4px;border-bottom:1px solid #E6E9F2;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5b6475}
+#tcalc input:focus,#tcalc select:focus{outline:none;border-color:#fff;box-shadow:0 0 0 3px rgba(115,140,192,.55)}
+#tcalc .tc-seg{display:flex;gap:6px;padding:5px;height:50px;border-radius:12px;background:rgba(3,5,22,.28);border:1px solid rgba(255,255,255,.2)}
+#tcalc .tc-seg label{flex:1;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;font-weight:600;letter-spacing:0;
+  text-transform:none;color:var(--tc-muted);margin:0;position:relative;border-radius:8px;transition:background .2s,color .2s}
+#tcalc .tc-seg input{position:absolute;opacity:0;pointer-events:none}
+#tcalc .tc-seg label.tc-on{background:var(--tc-cobalt);color:#fff;box-shadow:0 4px 14px rgba(0,71,187,.5),inset 0 1px 0 rgba(255,255,255,.3)}
+#tcalc .tc-results{margin-top:18px;position:relative;z-index:1}
+#tcalc .tc-rows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;container-type:inline-size}
+#tcalc .tc-stat{min-width:0}
+#tcalc .tc-stat.tc-span{grid-column:1 / -1}
+#tcalc .tc-stat-v{font-size:40px;font-size:clamp(20px,7.2cqi,44px);white-space:nowrap;overflow:hidden}
+#tcalc .tc-stat.tc-span .tc-stat-v{font-size:clamp(28px,9cqi,52px)}
+#tcalc .tc-stat-k{overflow-wrap:anywhere}
+#tcalc .tc-stat{padding:18px 20px;min-height:108px}
+#tcalc .tc-stat[hidden]{display:none}
+#tcalc .tc-stat-k{position:relative;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--tc-muted);font-weight:700}
+#tcalc .tc-stat-v{position:relative;font-family:"Bebas Neue",Impact,sans-serif;font-size:40px;line-height:1.05;margin-top:8px;color:#fff;letter-spacing:.01em}
+#tcalc .tc-stat{background:linear-gradient(160deg,#fff 0%,rgba(255,255,255,.96) 60%,rgba(255,255,255,.93) 100%);border-color:#fff;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(255,255,255,.5),0 12px 32px rgba(3,5,22,.28)}
+#tcalc .tc-stat::before{background:linear-gradient(160deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,0) 50%)}
+#tcalc .tc-stat .tc-stat-k{color:#4a4f5c}
+#tcalc .tc-stat .tc-stat-v{color:var(--tc-navy)}
+#tcalc .tc-stat.tc-key{box-shadow:inset 0 0 0 2px var(--tc-cobalt),0 12px 32px rgba(3,5,22,.28)}
+#tcalc .tc-stat.tc-key .tc-stat-v{color:var(--tc-cobalt)}
+#tcalc .tc-btn{display:inline-block;background:var(--tc-orange);color:var(--tc-navy) !important;text-decoration:none !important;font-weight:700;
+  font-size:16px;padding:14px 24px;border-radius:10px;border:0;box-shadow:0 6px 18px rgba(241,103,35,.4);transition:transform .12s,background .16s}
+#tcalc .tc-btn:hover{background:#ff7a3a}
+#tcalc .tc-btn:active{transform:translateY(1px)}
+#tcalc .tc-phone{font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:3px}
+#tcalc .tc-disc{font-size:12px;color:rgba(255,255,255,.6);margin:16px 4px 0}
+#tcalc .tc-solve{margin-top:18px}
+#tcalc .tc-printer{background:linear-gradient(135deg,rgba(0,71,187,.92) 0%,rgba(0,58,153,.82) 55%,rgba(1,17,126,.78) 100%);border-color:rgba(255,255,255,.34);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 12px 32px rgba(3,5,22,.3)}
+#tcalc .tc-printer::before{background:linear-gradient(160deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 45%)}
+#tcalc .tc-printer .tc-printer-copy{color:rgba(255,255,255,.85)}
+#tcalc .tc-printer .tc-solve-btn{background:var(--tc-navy);box-shadow:0 6px 18px rgba(3,5,22,.35),inset 0 1px 0 rgba(255,255,255,.2)}
+#tcalc .tc-printer .tc-solve-btn:hover{background:#0c1238}
+#tcalc .tc-printer{padding:16px 22px 0;border-bottom-left-radius:10px;border-bottom-right-radius:10px}
+#tcalc .tc-printer-top{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 18px;padding-bottom:16px}
+#tcalc .tc-printer-copy{flex:1 1 280px;font-size:14px;color:var(--tc-muted);margin:0}
+#tcalc .tc-printer-copy strong{display:block;color:#fff;font-size:16px;margin-bottom:2px}
+#tcalc .tc-solve-btn{display:inline-flex;align-items:center;gap:10px;background:var(--tc-cobalt);color:#fff;font:inherit;font-weight:700;font-size:16px;
+  padding:14px 22px;border-radius:10px;border:1px solid rgba(255,255,255,.35);cursor:pointer;margin:0;text-transform:none;letter-spacing:0;
+  box-shadow:0 6px 18px rgba(0,71,187,.55),inset 0 1px 0 rgba(255,255,255,.3);transition:background .16s,transform .12s}
+#tcalc .tc-solve-btn:hover{background:var(--tc-cobalt-dk)}
+#tcalc .tc-solve-btn:active{transform:translateY(1px)}
+#tcalc .tc-solve-btn svg{width:18px;height:18px;color:var(--tc-orange)}
+#tcalc .tc-slot{position:relative;height:12px;margin:0 6px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#02030d,#141B4D);box-shadow:inset 0 3px 6px rgba(0,0,0,.6)}
+#tcalc .tc-rwrap{display:grid;grid-template-rows:0fr;margin:0 30px;transition:grid-template-rows 1.7s linear}
+#tcalc .tc-rwrap.tc-printed{grid-template-rows:1fr}
+#tcalc .tc-rwrap.tc-resetting{transition:grid-template-rows .25s cubic-bezier(.2,0,0,1)}
+#tcalc .tc-rclip{overflow:hidden;min-height:0}
+#tcalc .tc-paper{background:#fff;color:var(--tc-navy);padding:22px 24px 40px;font-size:14px;line-height:1.45;transform:translateY(-100%);
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;
+  box-shadow:0 10px 30px rgba(3,5,22,.3);background-image:linear-gradient(180deg,rgba(3,5,22,.08),rgba(3,5,22,0) 18px)}
+#tcalc .tc-printed .tc-paper{animation:tcprint 1.7s steps(18,end) forwards}
+@keyframes tcprint{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+#tcalc .tc-r-brand{font-family:"Bebas Neue",Impact,sans-serif;font-size:30px;line-height:1;text-align:center;letter-spacing:.04em;margin:0}
+#tcalc .tc-r-sub{text-align:center;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#5b6475;margin:4px 0 0}
+#tcalc .tc-r-meta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#5b6475;margin-top:14px;font-variant-numeric:tabular-nums}
+#tcalc .tc-r-hr{border:0;border-top:2px dashed #B9BAB7;margin:14px 0}
+#tcalc .tc-r-sec{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tc-cobalt);margin:0 0 8px}
+#tcalc .tc-r-list{list-style:none;margin:0 0 14px;padding:0}
+#tcalc .tc-r-list li{display:flex;align-items:baseline;gap:8px;margin:0 0 8px}
+#tcalc .tc-r-list li::before{content:"";flex:0 0 6px;height:6px;margin-top:6px;border-radius:1px;background:var(--tc-orange);align-self:flex-start}
+#tcalc .tc-r-item{flex:1}
+#tcalc .tc-r-item b{display:block;font-weight:700;color:var(--tc-navy)}
+#tcalc .tc-r-item span{color:#5b6475;font-size:13px}
+#tcalc .tc-r-next{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-weight:700}
+#tcalc .tc-r-next span:last-child{font-family:"Bebas Neue",Impact,sans-serif;font-size:22px;font-weight:400;color:var(--tc-cobalt)}
+#tcalc .tc-r-inv{color:var(--tc-cobalt) !important;font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:24px;letter-spacing:.02em;text-decoration:underline;text-underline-offset:3px}
+#tcalc .tc-r-inv:hover{color:var(--tc-cobalt-dk) !important}
+#tcalc .tc-r-fine{font-size:11px;color:#5b6475;text-align:center;margin:16px 0 0}
+#tcalc .tc-disc a{color:#fff;font-weight:600;text-decoration:underline;text-decoration-style:solid}
+@media (prefers-reduced-motion:reduce){#tcalc .tc-open .tc-menu{animation:none}#tcalc .tc-rwrap{transition:none}#tcalc .tc-printed .tc-paper{animation:none;transform:none}}
+@media (max-width:680px){#tcalc{padding:24px 16px;border-radius:18px}#tcalc .tc-grid{grid-template-columns:1fr}#tcalc .tc-rows{gap:10px}#tcalc .tc-stat{padding:14px 14px;min-height:0}#tcalc .tc-stat-k{font-size:10.5px;letter-spacing:.06em}
+  #tcalc .tc-title{overflow-wrap:normal}#tcalc .tc-wordmark{font-size:15px;letter-spacing:.12em}#tcalc .tc-btn,#tcalc .tc-solve-btn{width:100%;justify-content:center;text-align:center}#tcalc .tc-printer{padding:16px 16px 0}#tcalc .tc-r-meta{flex-direction:column;gap:2px}#tcalc .tc-r-next{flex-direction:column;align-items:flex-start;gap:4px}#tcalc .tc-inputs{padding:18px}#tcalc .tc-stat{min-height:0}#tcalc .tc-rwrap{margin:0 12px}#tcalc .tc-paper{padding:18px 16px 36px}}
+@media (prefers-reduced-transparency:reduce){#tcalc .tc-glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,27,77,.85)}#tcalc .tc-light.tc-glass,#tcalc .tc-stat.tc-glass{background:#fff}}
+#tcalc{container-type:inline-size;container-name:tcalc}
+#tcalc [hidden]{display:none !important}
+#tcalc .tc-nojs{position:relative;margin:0 0 16px;padding:12px 14px;border-radius:10px;background:rgba(241,103,35,.18);border:1px solid rgba(241,103,35,.6);font-size:14px;color:#fff}
+#tcalc .tc-nojs a{color:#fff;font-weight:700;text-decoration:underline}
+#tcalc.tc-ready .tc-nojs{display:none}
+#tcalc .tc-q{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tc-muted);margin:0 0 10px}
+#tcalc .tc-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 18px}
+#tcalc .tc-mode{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:16px;margin:0;font:inherit;color:#fff;cursor:pointer;text-transform:none;letter-spacing:0;line-height:1.3;transition:background .2s cubic-bezier(.2,0,0,1),box-shadow .2s}
+#tcalc .tc-mode:hover{background:rgba(255,255,255,.17)}
+#tcalc .tc-mode:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(115,140,192,.8)}
+#tcalc .tc-mode-ic{position:relative;flex:0 0 36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);color:var(--tc-orange)}
+#tcalc .tc-mode-ic svg{width:19px;height:19px}
+#tcalc .tc-mode-tx{position:relative;display:block;min-width:0}
+#tcalc .tc-mode-t{display:block;font-weight:700;font-size:16px;line-height:1.25}
+#tcalc .tc-mode-s{display:block;font-size:13px;color:var(--tc-muted);margin-top:3px;line-height:1.35}
+#tcalc .tc-mode[aria-checked="true"]{background:#fff;border-color:#fff;box-shadow:inset 0 0 0 2px var(--tc-cobalt),0 12px 30px rgba(3,5,22,.3)}
+#tcalc .tc-mode[aria-checked="true"]::before{opacity:0}
+#tcalc .tc-mode[aria-checked="true"] .tc-mode-t{color:var(--tc-navy)}
+#tcalc .tc-mode[aria-checked="true"] .tc-mode-s{color:#4a4f5c}
+#tcalc .tc-mode[aria-checked="true"] .tc-mode-ic{background:var(--tc-cobalt);color:#fff}
+#tcalc .tc-help{font-size:13px;color:var(--tc-muted);margin:0;line-height:1.45}
+#tcalc .tc-err{display:none;font-size:13px;font-weight:600;color:#FFB08A;margin:0;line-height:1.4}
+#tcalc .tc-bad .tc-err{display:block}
+#tcalc .tc-bad input[type="number"],#tcalc .tc-bad input[type="text"]{border-color:var(--tc-orange);box-shadow:0 0 0 3px rgba(241,103,35,.28)}
+#tcalc .tc-seg label{min-width:0;padding:0 6px;text-align:center;line-height:1.15}
+#tcalc .tc-unitrow{display:flex;gap:10px}
+#tcalc .tc-unitrow .tc-dd{flex:1;min-width:0}
+#tcalc .tc-unitrow .tc-seg{flex:0 0 140px;height:48px}
+#tcalc .tc-growrow{display:flex;align-items:center;gap:14px;margin-top:6px}
+#tcalc input[type="range"]{flex:1;min-width:0;height:6px;margin:0;padding:0;border:0;border-radius:3px;-webkit-appearance:none;appearance:none;box-shadow:none;cursor:pointer;
+  background:linear-gradient(90deg,var(--tc-orange) var(--p,12.5%),rgba(255,255,255,.22) var(--p,12.5%))}
+#tcalc input[type="range"]:focus{outline:none}
+#tcalc input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--tc-cobalt);box-shadow:0 2px 8px rgba(3,5,22,.45)}
+#tcalc input[type="range"]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--tc-cobalt);box-shadow:0 2px 8px rgba(3,5,22,.45)}
+#tcalc input[type="range"]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(115,140,192,.6)}
+#tcalc .tc-pct{position:relative;flex:0 0 108px}
+#tcalc .tc-pct input{padding-right:34px}
+#tcalc .tc-pct span{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-weight:600;color:var(--tc-muted);pointer-events:none}
+#tcalc .tc-chips{display:flex;flex-wrap:wrap;gap:8px}
+#tcalc .tc-chip{font:inherit;font-size:14px;font-weight:600;line-height:1.2;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.26);border-radius:999px;
+  padding:9px 14px;min-height:40px;margin:0;cursor:pointer;text-transform:none;letter-spacing:0;box-shadow:none;font-variant-numeric:tabular-nums;transition:background .16s,color .16s}
+#tcalc .tc-chip:hover{background:rgba(255,255,255,.18)}
+#tcalc .tc-chip:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(115,140,192,.7)}
+#tcalc .tc-chip[aria-pressed="true"]{background:#fff;color:var(--tc-cobalt);border-color:#fff}
+#tcalc .tc-results{margin-top:18px}
+#tcalc .tc-stat-s{position:relative;font-size:13px;color:#5b6475;margin-top:4px;line-height:1.35}
+#tcalc .tc-stat.tc-key .tc-stat-s{color:#3d4a6b}
+#tcalc .tc-msg{position:relative;font-size:14px;color:var(--tc-muted);margin:14px 2px 0}
+#tcalc .tc-msg:empty{display:none}
+#tcalc .tc-assume{position:relative;font-size:13px;color:var(--tc-muted);margin:14px 2px 0;line-height:1.5}
+#tcalc .tc-assume b{color:#fff}
+#tcalc .tc-ghost{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:700;font-size:15px;line-height:1.25;color:#fff !important;
+  background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.55);border-radius:10px;padding:12px 16px;margin:0;cursor:pointer;text-transform:none;letter-spacing:0;
+  text-decoration:none !important;transition:background .16s}
+#tcalc .tc-ghost:hover{background:rgba(255,255,255,.18)}
+#tcalc .tc-ghost:focus-visible,#tcalc .tc-btn:focus-visible,#tcalc .tc-solve-btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(115,140,192,.8)}
+#tcalc .tc-ghost svg{width:17px;height:17px;flex:0 0 17px}
+#tcalc .tc-btn{font-family:inherit;line-height:1.3;cursor:pointer;margin:0;text-transform:none;letter-spacing:0;text-align:center}
+#tcalc .tc-next{margin-top:16px;padding:18px 22px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#tcalc .tc-next .tc-btn{grid-column:1 / -1;width:100%;font-size:17px;padding:15px 20px}
+#tcalc .tc-next .tc-ghost{width:100%}
+#tcalc .tc-next .tc-phone{position:relative;grid-column:1 / -1;justify-self:center;font-size:15px}
+#tcalc .tc-next-h{grid-column:1 / -1}
+#tcalc .tc-next-h{position:relative;flex:1 1 100%;margin:0 0 2px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tc-muted)}
+#tcalc .tc-cmp{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+#tcalc .tc-cmp-h{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tc-muted);margin:4px 2px 0}
+#tcalc .tc-cmp-row{padding:16px 18px;min-height:0}
+#tcalc .tc-cmp-top{position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px 12px;flex-wrap:wrap}
+#tcalc .tc-cmp-r{font-family:"Bebas Neue",Impact,sans-serif;font-size:30px;line-height:1;color:var(--tc-navy);letter-spacing:.01em}
+#tcalc .tc-badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.03em;line-height:1.2;padding:5px 10px;border-radius:2px}
+#tcalc .tc-b-under{background:var(--tc-orange);color:var(--tc-navy)}
+#tcalc .tc-b-tight{background:#FDE3D6;color:#7A2E08}
+#tcalc .tc-b-good{background:#DCE6F8;color:var(--tc-cobalt)}
+#tcalc .tc-b-room{background:#ECEDEF;color:#4a4f5c}
+#tcalc .tc-bar{position:relative;height:8px;border-radius:4px;background:#E6E9F2;margin:12px 0 10px;overflow:hidden}
+#tcalc .tc-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--tc-cobalt)}
+#tcalc .tc-bar.tc-over i{background:var(--tc-orange)}
+#tcalc .tc-cmp-m{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:12px;color:#5b6475;line-height:1.3}
+#tcalc .tc-cmp-m b{display:block;margin-top:2px;color:var(--tc-navy);font-size:15px;font-variant-numeric:tabular-nums}
+#tcalc .tc-carry{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px;padding:0;list-style:none}
+#tcalc .tc-carry li{font-size:13px;font-weight:600;line-height:1.3;background:rgba(3,5,22,.3);border:1px solid rgba(255,255,255,.18);border-radius:2px;padding:5px 10px;margin:0}
+#tcalc .tc-link{background:none;border:0;padding:6px 2px;margin:0;color:#fff;font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-transform:none;letter-spacing:0;box-shadow:none}
+#tcalc .tc-light{background:linear-gradient(160deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.92) 55%,rgba(244,247,252,.88) 100%);border-color:rgba(255,255,255,.95);color:var(--tc-navy);
+  -webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(255,255,255,.6),0 14px 36px rgba(3,5,22,.28)}
+#tcalc .tc-light::before{background:linear-gradient(160deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,0) 48%)}
+#tcalc .tc-light > *{position:relative;z-index:1}
+#tcalc .tc-light label,#tcalc .tc-light .tc-label{color:#4A4F5C}
+#tcalc .tc-light .tc-hint,#tcalc .tc-light .tc-help,#tcalc .tc-light .tc-dialog-p,#tcalc .tc-light .tc-next-h{color:#5B6475}
+#tcalc .tc-light .tc-err{color:#B4400F}
+#tcalc .tc-light input[type="number"],#tcalc .tc-light input[type="text"],#tcalc .tc-light input[type="email"],#tcalc .tc-light .tc-dd-btn{color:var(--tc-navy);background:#F4F6FA;border-color:#B9BAB7;box-shadow:inset 0 1px 2px rgba(3,5,22,.06)}
+#tcalc .tc-light .tc-dd-btn:hover{background:#EDF2FB}
+#tcalc .tc-light input::placeholder{color:#8A8F9C}
+#tcalc .tc-light input[type="number"]:focus,#tcalc .tc-light input[type="text"]:focus,#tcalc .tc-light input[type="email"]:focus,#tcalc .tc-light .tc-dd-btn:focus{border-color:var(--tc-cobalt);box-shadow:0 0 0 3px rgba(0,71,187,.22);background:#fff}
+#tcalc .tc-light .tc-bad input[type="number"],#tcalc .tc-light .tc-bad input[type="text"],#tcalc .tc-light .tc-bad input[type="email"]{border-color:var(--tc-orange);box-shadow:0 0 0 3px rgba(241,103,35,.22)}
+#tcalc .tc-light .tc-open .tc-dd-btn,#tcalc .tc-light .tc-open input[type="number"]{border-color:var(--tc-cobalt);background:#fff;box-shadow:0 0 0 3px rgba(0,71,187,.22)}
+#tcalc .tc-light .tc-chev{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23141B4D' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}
+#tcalc .tc-light .tc-seg{background:#EEF1F6;border-color:#DBDBD9}
+#tcalc .tc-light .tc-seg label:not(.tc-on){color:#4A4F5C}
+#tcalc .tc-light .tc-seg label:not(.tc-on):hover{color:var(--tc-cobalt)}
+#tcalc .tc-light .tc-chip{color:var(--tc-navy);background:#fff;border-color:#B9BAB7}
+#tcalc .tc-light .tc-chip:hover{background:#EDF2FB;border-color:var(--tc-cobalt)}
+#tcalc .tc-light .tc-chip[aria-pressed="true"]{background:var(--tc-cobalt);color:#fff;border-color:var(--tc-cobalt)}
+#tcalc .tc-light input[type="range"]{background:linear-gradient(90deg,var(--tc-orange) var(--p,12.5%),rgba(20,27,77,.16) var(--p,12.5%))}
+#tcalc .tc-light .tc-pct span{color:#5B6475}
+#tcalc .tc-light .tc-ghost{color:var(--tc-cobalt) !important;background:#fff;border-color:var(--tc-cobalt)}
+#tcalc .tc-light .tc-ghost:hover{background:#EDF2FB}
+#tcalc .tc-light .tc-link,#tcalc .tc-light .tc-phone{color:var(--tc-cobalt)}
+#tcalc .tc-light .tc-dialog-h{color:var(--tc-navy)}
+#tcalc .tc-light .tc-carry li{background:#EEF1F6;border-color:#DBDBD9;color:var(--tc-navy)}
+#tcalc .tc-next .tc-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px}
+#tcalc .tc-next .tc-btn svg{width:20px;height:20px;flex:0 0 20px}
+#tcalc .tc-dialog{width:min(480px,calc(100% - 32px));max-width:none;max-height:calc(100% - 32px);padding:0;margin:auto;border:0;background:transparent;color:var(--tc-navy);overflow:visible;font-family:"DM Sans",Arial,Helvetica,sans-serif;font-size:16px;line-height:1.55}
+#tcalc .tc-dialog::backdrop{background:rgba(3,5,22,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#tcalc .tc-dialog[open]{animation:tcmenu .2s cubic-bezier(.2,0,0,1)}
+#tcalc .tc-dialog-card{position:relative;margin:0;padding:26px 24px 22px;border-radius:18px;border-top:4px solid var(--tc-cobalt);box-shadow:inset 0 1px 0 #fff,0 24px 60px rgba(3,5,22,.45)}
+#tcalc .tc-dialog-x{position:absolute;top:10px;right:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;padding:0;margin:0;border:0;border-radius:8px;background:transparent;color:#4A4F5C;font:inherit;font-size:24px;line-height:1;cursor:pointer;box-shadow:none;z-index:2}
+#tcalc .tc-dialog-x:hover{background:#EDF2FB;color:var(--tc-cobalt)}
+#tcalc .tc-dialog-x:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(0,71,187,.3)}
+#tcalc .tc-dialog-ic{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#EDF2FB;color:var(--tc-cobalt)}
+#tcalc .tc-dialog-ic svg{width:20px;height:20px}
+#tcalc .tc-dialog-h{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:32px;line-height:1;letter-spacing:.01em;text-transform:uppercase;margin:14px 0 6px;color:var(--tc-navy)}
+#tcalc .tc-dialog-p{font-size:14px;margin:0 0 14px}
+#tcalc .tc-dialog .tc-carry{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:0;list-style:none}
+#tcalc .tc-dialog .tc-carry li{font-size:13px;font-weight:600;line-height:1.3;background:#EEF1F6;border:1px solid #DBDBD9;border-radius:2px;padding:5px 10px;margin:0;color:var(--tc-navy)}
+#tcalc .tc-dialog-fields{display:flex;flex-direction:column;gap:14px}
+#tcalc .tc-dialog-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:20px}
+#tcalc .tc-dialog-actions .tc-btn[disabled]{opacity:.65;cursor:progress}
+#tcalc .tc-dialog-status{margin:16px 0 0;font-size:14px;line-height:1.5;color:var(--tc-navy)}
+#tcalc .tc-dialog-status:empty{display:none}
+#tcalc .tc-dialog-status.tc-ok{padding:12px 14px;border-radius:10px;background:#E8F1FE;border:1px solid #B9CDF0}
+#tcalc .tc-dialog-status.tc-fail{padding:12px 14px;border-radius:10px;background:#FDEDE4;border:1px solid #F5C3A6;color:#7A2E08}
+#tcalc .tc-dialog-status a{color:var(--tc-cobalt);font-weight:700;text-decoration:underline}
+@container tcalc (max-width:640px){
+  #tcalc .tc-modes{grid-template-columns:minmax(0,1fr);gap:8px}
+  #tcalc .tc-mode{padding:12px 14px;align-items:center}
+  #tcalc .tc-grid{grid-template-columns:minmax(0,1fr)}
+  #tcalc .tc-next .tc-btn,#tcalc .tc-next .tc-ghost,  #tcalc .tc-next{grid-template-columns:minmax(0,1fr)}
+  #tcalc .tc-unitrow .tc-seg{flex-basis:118px}
+    }
+@media (max-width:680px){
+  #tcalc .tc-seg label{font-size:14px}
+  #tcalc .tc-next{padding:16px}
+  #tcalc .tc-cmp-r{font-size:26px}
+}
+
+html,body{margin:0;padding:0;background:transparent}body{padding-bottom:4px}#tcalc{margin:0 auto;box-shadow:none}</style></head><body><div id="tcalc" data-quote-url="https://sunbeltsolomon.com/request-a-quote-custom-form/" data-inventory-url="https://sunbeltsolomon.com/products/" data-phone="888-691-4712" data-ratings-1ph="10,15,25,37.5,50,75,100,167,250,333,500" data-ratings-3ph="45,75,112.5,150,225,300,500,750,1000,1500,2000,2500,3000,3750,5000,7500,10000" data-contact-url="https://sunbeltsolomon.com/contact-us/" data-email-subject="Your Power Solutions Has Arrived!" data-copy-email="" data-emailjs-public-key="" data-emailjs-service-id="" data-emailjs-template-id="" data-link-target="_top"><span class="tc-blob tc-b1"></span><span class="tc-blob tc-b2"></span><span class="tc-blob tc-b3"></span> <p class="tc-eyebrow"><span class="tc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01M12 10h.01M8 10h.01M12 14h.01M8 14h.01M12 18h.01M8 18h.01"/></svg></span><span class="tc-wordmark">Sunbelt Solomon</span></p> <h2 class="tc-title">Transformer calculator</h2> <p class="tc-nojs">This calculator needs JavaScript to run. Please refresh the page, or call <a href="tel:8886914712">888-691-4712</a> for help sizing a transformer.</p> <p class="tc-q" id="tc-mode-q">What would you like to calculate?</p> <div class="tc-modes" role="radiogroup" aria-labelledby="tc-mode-q">   <button type="button" class="tc-mode tc-glass" role="radio" aria-checked="true" data-mode="size">     <span class="tc-mode-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span>     <span class="tc-mode-tx"><span class="tc-mode-t">Find a transformer size</span><span class="tc-mode-s">I know my load</span></span>   </button>   <button type="button" class="tc-mode tc-glass" role="radio" aria-checked="false" data-mode="amps">     <span class="tc-mode-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>     <span class="tc-mode-tx"><span class="tc-mode-t">Calculate transformer amps</span><span class="tc-mode-s">I know the transformer rating</span></span>   </button>   <button type="button" class="tc-mode tc-glass" role="radio" aria-checked="false" data-mode="compare">     <span class="tc-mode-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>     <span class="tc-mode-tx"><span class="tc-mode-t">Compare transformer options</span><span class="tc-mode-s">I'm deciding between sizes</span></span>   </button> </div> <form class="tc-calc" onsubmit="return false" novalidate>   <div class="tc-inputs tc-glass tc-light"><div class="tc-grid">     <div class="tc-field tc-full">       <span class="tc-label">Phase</span>       <div class="tc-seg">         <label><input type="radio" name="tc-ph" value="1">Single-phase</label>         <label class="tc-on"><input type="radio" name="tc-ph" value="3" checked>Three-phase</label>       </div>     </div>     <div class="tc-field tc-full" data-modes="size compare">       <span class="tc-label">Load information</span>       <div class="tc-seg">         <label class="tc-on"><input type="radio" name="tc-lt" value="kva" checked>kVA</label>         <label><input type="radio" name="tc-lt" value="kw">kW</label>         <label><input type="radio" name="tc-lt" value="amps">Amps</label>       </div>     </div>     <div class="tc-field" data-modes="size compare">       <label for="tc-load" id="tc-load-lbl">Load (kVA)</label>       <input type="number" id="tc-load" inputmode="decimal" min="0" step="any" placeholder="e.g. 750">       <p class="tc-err" aria-live="polite"></p>     </div>     <div class="tc-field" data-modes="size compare">       <label for="tc-volt">Supply voltage (V) <span class="tc-hint" id="tc-volt-hint">optional, to calculate current</span></label>       <input type="number" id="tc-volt" data-suggest="volts" autocomplete="off" inputmode="decimal" min="0" step="any" placeholder="e.g. 480 or 13800">       <p class="tc-err" aria-live="polite"></p>     </div>     <div class="tc-field tc-full" data-modes="size compare" data-kw-only hidden>       <label for="tc-pf">Power factor <span class="tc-hint">we suggest 0.9</span></label>       <input type="number" id="tc-pf" inputmode="decimal" min="0.5" max="1" step="0.01" value="0.9" style="max-width:220px">       <p class="tc-help">Power factor converts kW (real power) to kVA (what a transformer is rated in). Most commercial and industrial loads run 0.8 to 0.95. Keep 0.9 if you're not sure.</p>       <p class="tc-err" aria-live="polite"></p>     </div>     <div class="tc-field tc-full" data-modes="size compare">       <span class="tc-label">Do you expect the load to grow? <span class="tc-hint">optional</span></span>       <div class="tc-seg" style="max-width:320px">         <label class="tc-on"><input type="radio" name="tc-gr" value="no" checked>Skip</label>         <label><input type="radio" name="tc-gr" value="yes">Yes, add growth</label>       </div>       <div class="tc-growrow" data-grow-row hidden>         <input type="range" id="tc-grow-r" min="0" max="100" step="5" value="25" aria-label="Growth allowance percent">         <div class="tc-pct"><input type="number" id="tc-grow" inputmode="decimal" min="0" max="200" step="1" value="25" aria-label="Growth allowance percent"><span>%</span></div>       </div>       <p class="tc-err" aria-live="polite"></p>     </div>     <div class="tc-field tc-full" data-modes="compare">       <span class="tc-label">Ratings to compare <span class="tc-hint">pick up to 3</span></span>       <div class="tc-chips" data-picks role="group" aria-label="Transformer ratings to compare"></div>       <p class="tc-help" data-pick-help>We pre-select the ratings around your load. Tap to change them.</p>     </div>     <div class="tc-field tc-full" data-modes="amps">       <label for="tc-rating" id="tc-rating-lbl">Transformer rating</label>       <div class="tc-unitrow">         <input type="number" id="tc-rating" data-suggest="ratings" autocomplete="off" inputmode="decimal" min="0" step="any" placeholder="e.g. 750">         <div class="tc-seg" role="group" aria-label="Rating unit">           <label class="tc-on"><input type="radio" name="tc-ru" value="kva" checked>kVA</label>           <label><input type="radio" name="tc-ru" value="mva">MVA</label>         </div>       </div>       <p class="tc-err" aria-live="polite"></p>     </div>     <div class="tc-field" data-modes="amps">       <label for="tc-pv">Primary voltage (V) <span class="tc-hint">line-to-line</span></label>       <input type="number" id="tc-pv" data-suggest="volts" autocomplete="off" inputmode="decimal" min="0" step="any" placeholder="e.g. 13800">       <p class="tc-err" aria-live="polite"></p>     </div>     <div class="tc-field" data-modes="amps">       <label for="tc-sv">Secondary voltage (V) <span class="tc-hint">line-to-line</span></label>       <input type="number" id="tc-sv" data-suggest="volts" autocomplete="off" inputmode="decimal" min="0" step="any" placeholder="e.g. 480">       <p class="tc-err" aria-live="polite"></p>     </div>     <div class="tc-field" data-modes="amps" data-3ph-only>       <label for="tc-pc">Primary connection <span class="tc-hint">optional</span></label>       <select id="tc-pc"><option value="unsure" selected>I'm not sure</option><option value="delta">Delta</option><option value="wye">Wye</option></select>     </div>     <div class="tc-field" data-modes="amps" data-3ph-only>       <label for="tc-sc">Secondary connection <span class="tc-hint">optional</span></label>       <select id="tc-sc"><option value="unsure" selected>I'm not sure</option><option value="delta">Delta</option><option value="wye">Wye</option></select>     </div>   </div></div> </form> <div class="tc-results" aria-live="polite">   <div class="tc-rows" data-tiles></div>   <div class="tc-cmp" data-cmp hidden></div>   <p class="tc-msg" data-msg></p>   <p class="tc-assume" data-assume></p> </div> <div class="tc-solve">   <div class="tc-printer tc-glass">     <div class="tc-printer-top">       <p class="tc-printer-copy"><strong>Planning a project around this unit?</strong>Get a list of the equipment, testing and engineering work it will likely need.</p>       <button type="button" class="tc-solve-btn" data-solve><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Click to solve your power problems</button>     </div>     <div class="tc-slot"></div>   </div>   <div class="tc-rwrap" aria-live="polite"><div class="tc-rclip"><div class="tc-paper" data-receipt></div></div></div> </div> <div class="tc-next tc-glass tc-light" data-next hidden>   <p class="tc-next-h">Next steps</p>   <button type="button" class="tc-btn" data-quote><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>Request a quote or engineering review</button>   <button type="button" class="tc-ghost" data-email><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Email results</button>   <button type="button" class="tc-ghost" data-print><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>Download or print summary</button>   <a class="tc-phone" data-phone-link hidden></a> </div> <dialog class="tc-dialog" data-email-dialog aria-labelledby="tc-email-h">   <form class="tc-dialog-card tc-glass tc-light" data-email-form novalidate>     <button type="button" class="tc-dialog-x" data-email-close aria-label="Close">×</button>     <span class="tc-dialog-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>     <h3 class="tc-dialog-h" id="tc-email-h">Email your results</h3>     <p class="tc-dialog-p">We'll send these results to your inbox so you can keep them or share them with your team.</p>     <ul class="tc-carry" data-email-carry></ul>     <div class="tc-dialog-fields">       <div class="tc-field">         <label for="tc-em-name">Your name <span class="tc-hint">optional</span></label>         <input type="text" id="tc-em-name" autocomplete="name" placeholder="First and last name">       </div>       <div class="tc-field">         <label for="tc-em-email">Email address</label>         <input type="email" id="tc-em-email" autocomplete="email" inputmode="email" placeholder="name@company.com">         <p class="tc-err" aria-live="polite"></p>       </div>     </div>     <p class="tc-dialog-status" data-email-status aria-live="polite"></p>     <div class="tc-dialog-actions">       <button type="submit" class="tc-btn" data-email-send>Send my results</button>       <button type="button" class="tc-link" data-email-close>Cancel</button>     </div>   </form> </dialog> <p class="tc-disc">Results are estimates for planning purposes. Final transformer selection should account for load type, motor starting, harmonics, ambient conditions and applicable codes. Confirm with a qualified engineer. Contact us for more information: <a href="tel:8886914712">888-691-4712</a>.</p> </div><script>(function(){
+  var root = document.getElementById('tcalc');
+  if (!root) { return; }
+  var SQ3 = Math.sqrt(3);
+  function parseList(attr, fallback){
+    var raw = (root.getAttribute(attr) || '').trim();
+    if (!raw) { return fallback; }
+    var out = raw.split(',').map(function(x){ return parseFloat(x); }).filter(function(x){ return isFinite(x) ? x > 0 : false; });
+    out.sort(function(a, b){ return a - b; });
+    return out.length ? out : fallback;
+  }
+  var RATINGS = {
+    1: parseList('data-ratings-1ph', [10, 15, 25, 37.5, 50, 75, 100, 167, 250, 333, 500]),
+    3: parseList('data-ratings-3ph', [45, 75, 112.5, 150, 225, 300, 500, 750, 1000, 1500, 2000, 2500, 3000, 3750, 5000, 7500, 10000])
+  };
+  var VOLTS = [120, 208, 240, 277, 480, 600, 2400, 4160, 12470, 13200, 13800, 24940, 34500];
+  var MAX_KVA = 100000;
+  var quoteUrl = root.getAttribute('data-quote-url') || '/contact/';
+  var invUrl = root.getAttribute('data-inventory-url') || '/inventory/';
+  var phone = (root.getAttribute('data-phone') || '').trim();
+  var copyEmail = (root.getAttribute('data-copy-email') || '').trim();
+  var contactUrl = (root.getAttribute('data-contact-url') || '').trim();
+  var emailSubject = (root.getAttribute('data-email-subject') || 'Your transformer calculator results').trim();
+  var ejs = { key: (root.getAttribute('data-emailjs-public-key') || '').trim(), service: (root.getAttribute('data-emailjs-service-id') || '').trim(), template: (root.getAttribute('data-emailjs-template-id') || '').trim() };
+  var framed = false;
+  try { framed = window.self !== window.top; } catch (e) { framed = true; }
+  /* where links open: data-link-target="_top" on an embed page sends visitors to the full site page; otherwise framed previews open a new tab */
+  var linkTarget = root.getAttribute('data-link-target') || (framed ? '_blank' : '_self');
+  function go(dest){
+    if (linkTarget === '_top') {
+      try { window.top.location.href = dest; return; } catch (e) { window.open(dest, '_blank', 'noopener'); return; }
+    }
+    if (linkTarget === '_blank') { window.open(dest, '_blank', 'noopener'); return; }
+    window.location.href = dest;
+  }
+  var MODE_LABEL = { size: 'Find a transformer size', amps: 'Calculate transformer amps', compare: 'Compare transformer options' };
+  function $(sel){ return root.querySelector(sel); }
+  function $$(sel){ return Array.prototype.slice.call(root.querySelectorAll(sel)); }
+  function fmt(v, d){ return v.toLocaleString('en-US', { maximumFractionDigits: (d === undefined ? 1 : d) }); }
+  function fmtV(v){ return v >= 1000 ? fmt(v / 1000, 3) + ' kV' : fmt(v, 0) + ' V'; }
+  function fmtKva(v){ return fmt(v, 2) + ' kVA'; }
+  function fmtA(v){ return fmt(v, 1) + ' A'; }
+  function phaseWord(p){ return p === 1 ? 'single-phase' : 'three-phase'; }
+  function cap(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
+  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function radio(name){ var r = root.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : null; }
+  function track(name, data){
+    window.dataLayer = window.dataLayer || [];
+    data = data || {};
+    data.event = 'transformer_calculator';
+    data.calc_action = name;
+    window.dataLayer.push(data);
+  }
+  /* read a numeric field: {empty, v} where v is NaN when not a number */
+  function val(el){
+    var raw = String(el.value).replace(/,/g, '').trim();
+    if (raw === '') { return { empty: true, v: NaN }; }
+    var v = parseFloat(raw);
+    return { empty: false, v: isFinite(v) ? v : NaN };
+  }
+  /* ---- field errors ---- */
+  var touched = {};
+  function setErr(el, msg){
+    var f = el.closest('.tc-field');
+    if (!f) { return; }
+    var e = f.querySelector('.tc-err');
+    if (msg) { f.classList.add('tc-bad'); if (e) { e.textContent = msg; } }
+    else { f.classList.remove('tc-bad'); if (e) { e.textContent = ''; } }
+  }
+  function checkVolt(el, required){
+    var r = val(el);
+    if (r.empty) { return { v: NaN, err: (required ? (touched[el.id] ? 'Enter a line-to-line voltage, like 480 or 13800.' : '') : '') }; }
+    if (!(r.v > 0)) { return { v: NaN, err: 'Enter a voltage greater than 0.' }; }
+    if (100 > r.v) { return { v: NaN, err: 'Enter volts, not kV. For example, 13.8 kV is 13800.' }; }
+    if (r.v > 230000) { return { v: NaN, err: 'Enter a line-to-line voltage up to 230,000 V.' }; }
+    return { v: r.v, err: '' };
+  }
+  /* ---- elements ---- */
+  var elLoad = $('#tc-load'), elVolt = $('#tc-volt'), elPf = $('#tc-pf'), elGrow = $('#tc-grow'), elGrowR = $('#tc-grow-r');
+  var elRating = $('#tc-rating'), elPv = $('#tc-pv'), elSv = $('#tc-sv'), elPc = $('#tc-pc'), elSc = $('#tc-sc');
+  var calcForm = $('.tc-calc'), tilesEl = $('[data-tiles]'), cmpEl = $('[data-cmp]'), msgEl = $('[data-msg]'), assumeEl = $('[data-assume]');
+  var nextEl = $('[data-next]'), picksEl = $('[data-picks]');
+  var mode = 'size', userPicks = null, last = null;
+  /* phone */
+  $$('[data-phone-link]').forEach(function(a){
+    if (phone) { a.hidden = false; a.textContent = 'or call ' + phone; a.href = 'tel:' + phone.replace(/[^0-9+]/g, ''); }
+  });
+  /* segmented controls */
+  function syncSegs(){
+    $$('.tc-seg label').forEach(function(l){ var i = l.querySelector('input'); if (i) { l.classList.toggle('tc-on', i.checked); } });
+  }
+  root.addEventListener('change', function(e){ if (e.target.type === 'radio') { syncSegs(); } });
+  /* ---- custom glass dropdowns ---- */
+  var ddCount = 0, openMenus = [];
+  function fire(el){
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+  function closeAll(except){ openMenus.slice().forEach(function(m){ if (m !== except) { m.close(); } }); }
+  document.addEventListener('mousedown', function(e){
+    if (!root.contains(e.target)) { closeAll(null); return; }
+    openMenus.slice().forEach(function(m){ if (!m.wrap.contains(e.target)) { m.close(); } });
+  });
+  function makeMenu(wrap){
+    var ul = document.createElement('ul');
+    ul.className = 'tc-menu';
+    ul.setAttribute('role', 'listbox');
+    ul.id = 'tc-menu-' + (++ddCount);
+    wrap.appendChild(ul);
+    return ul;
+  }
+  function moveActive(ul, dir){
+    var opts = Array.prototype.slice.call(ul.querySelectorAll('.tc-opt'));
+    if (!opts.length) { return null; }
+    var i = -1;
+    opts.forEach(function(o, n){ if (o.classList.contains('tc-active')) { i = n; } });
+    if (i === -1) { opts.forEach(function(o, n){ if (o.getAttribute('aria-selected') === 'true') { i = n; } }); }
+    i = i + dir;
+    if (0 > i) { i = opts.length - 1; }
+    if (i >= opts.length) { i = 0; }
+    opts.forEach(function(o){ o.classList.remove('tc-active'); });
+    opts[i].classList.add('tc-active');
+    var o = opts[i];
+    if (o.offsetTop > ul.scrollTop + ul.clientHeight - o.offsetHeight) { ul.scrollTop = o.offsetTop - ul.clientHeight + o.offsetHeight + 6; }
+    if (ul.scrollTop > o.offsetTop) { ul.scrollTop = o.offsetTop - 6; }
+    return opts[i];
+  }
+  function makeApi(wrap, ctl){
+    var api = { wrap: wrap };
+    api.close = function(){
+      wrap.classList.remove('tc-open');
+      ctl.setAttribute('aria-expanded', 'false');
+      var i = openMenus.indexOf(api);
+      if (i > -1) { openMenus.splice(i, 1); }
+    };
+    return api;
+  }
+  function enhanceSelect(sel){
+    var wrap = document.createElement('div');
+    wrap.className = 'tc-dd';
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(sel);
+    sel.classList.add('tc-native');
+    sel.setAttribute('tabindex', '-1');
+    sel.setAttribute('aria-hidden', 'true');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'tc-dd-btn';
+    btn.id = sel.id + '-btn';
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span class="tc-dd-val"></span><span class="tc-chev" aria-hidden="true"></span>';
+    wrap.appendChild(btn);
+    var lbl = root.querySelector('label[for="' + sel.id + '"]');
+    if (lbl) { lbl.setAttribute('for', btn.id); lbl.id = lbl.id || (btn.id + '-lbl'); btn.setAttribute('aria-labelledby', lbl.id + ' ' + btn.id); }
+    var ul = makeMenu(wrap);
+    var api = makeApi(wrap, btn);
+    function sync(){ btn.querySelector('.tc-dd-val').textContent = sel.options[sel.selectedIndex].text; }
+    function choose(v){
+      if (sel.value !== v) { sel.value = v; sync(); fire(sel); }
+      api.close(); btn.focus();
+    }
+    function build(){
+      ul.innerHTML = '';
+      Array.prototype.forEach.call(sel.options, function(o){
+        var li = document.createElement('li');
+        li.className = 'tc-opt';
+        li.setAttribute('role', 'option');
+        li.setAttribute('data-value', o.value);
+        li.setAttribute('aria-selected', o.selected ? 'true' : 'false');
+        li.textContent = o.text;
+        li.addEventListener('click', function(){ choose(o.value); });
+        ul.appendChild(li);
+      });
+    }
+    function open(){
+      closeAll(api); build(); wrap.classList.add('tc-open'); btn.setAttribute('aria-expanded', 'true');
+      if (openMenus.indexOf(api) === -1) { openMenus.push(api); }
+    }
+    btn.addEventListener('click', function(){ if (wrap.classList.contains('tc-open')) { api.close(); } else { open(); } });
+    btn.addEventListener('keydown', function(e){
+      var isOpen = wrap.classList.contains('tc-open');
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (!isOpen) { open(); } moveActive(ul, e.key === 'ArrowDown' ? 1 : -1); }
+      else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (isOpen) { var a = ul.querySelector('.tc-active'); if (a) { choose(a.getAttribute('data-value')); } else { api.close(); } } else { open(); }
+      }
+      else if (e.key === 'Escape' || e.key === 'Tab') { api.close(); }
+    });
+    sel.addEventListener('change', sync);
+    sel.tcSync = sync;
+    sync();
+  }
+  function enhanceSuggest(input, getList, getUnit){
+    var wrap = document.createElement('div');
+    wrap.className = 'tc-dd';
+    input.parentNode.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    input.setAttribute('role', 'combobox');
+    input.setAttribute('aria-autocomplete', 'list');
+    input.setAttribute('aria-expanded', 'false');
+    var ul = makeMenu(wrap);
+    input.setAttribute('aria-controls', ul.id);
+    var api = makeApi(wrap, input);
+    function choose(v){ input.value = v; api.close(); fire(input); }
+    function build(){
+      var unit = getUnit();
+      var typed = String(input.value).replace(/[^0-9.]/g, '');
+      var list = getList();
+      var shown = list.filter(function(v){ return typed === '' ? true : String(v).indexOf(typed) === 0; });
+      if (!shown.length) { shown = list; }
+      ul.innerHTML = '<li class="tc-menu-head" role="presentation">Common ' + (unit === 'V' ? 'voltages' : 'ratings') + '</li>';
+      shown.forEach(function(v){
+        var li = document.createElement('li');
+        li.className = 'tc-opt';
+        li.setAttribute('role', 'option');
+        li.setAttribute('data-value', v);
+        li.setAttribute('aria-selected', String(v) === typed ? 'true' : 'false');
+        li.innerHTML = '<span>' + fmt(v, 3) + ' ' + unit + '</span>';
+        li.addEventListener('mousedown', function(e){ e.preventDefault(); choose(v); });
+        ul.appendChild(li);
+      });
+    }
+    function open(){
+      closeAll(api); build(); wrap.classList.add('tc-open'); input.setAttribute('aria-expanded', 'true');
+      if (openMenus.indexOf(api) === -1) { openMenus.push(api); }
+    }
+    input.addEventListener('focus', open);
+    input.addEventListener('click', function(){ if (!wrap.classList.contains('tc-open')) { open(); } });
+    input.addEventListener('input', function(e){ if (e.isTrusted) { open(); } });
+    input.addEventListener('blur', function(){ setTimeout(api.close, 120); });
+    input.addEventListener('keydown', function(e){
+      var isOpen = wrap.classList.contains('tc-open');
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (!isOpen) { open(); } moveActive(ul, e.key === 'ArrowDown' ? 1 : -1); }
+      else if (e.key === 'Enter') { if (isOpen) { var a = ul.querySelector('.tc-active'); if (a) { e.preventDefault(); choose(a.getAttribute('data-value')); } else { api.close(); } } }
+      else if (e.key === 'Escape' || e.key === 'Tab') { api.close(); }
+    });
+  }
+  function ratingSuggestions(){
+    var p = parseInt(radio('tc-ph'), 10) || 3;
+    var list = RATINGS[p];
+    if (radio('tc-ru') === 'mva') {
+      return list.filter(function(r){ return r >= 500; }).map(function(r){ return r / 1000; });
+    }
+    return list;
+  }
+  $$('select').forEach(enhanceSelect);
+  $$('input[data-suggest="volts"]').forEach(function(i){ enhanceSuggest(i, function(){ return VOLTS; }, function(){ return 'V'; }); });
+  $$('input[data-suggest="ratings"]').forEach(function(i){ enhanceSuggest(i, ratingSuggestions, function(){ return radio('tc-ru') === 'mva' ? 'MVA' : 'kVA'; }); });
+  /* ---- growth slider + number stay in sync ---- */
+  function paintRange(){ elGrowR.style.setProperty('--p', (parseFloat(elGrowR.value) / parseFloat(elGrowR.max) * 100) + '%'); }
+  elGrowR.addEventListener('input', function(){ elGrow.value = elGrowR.value; paintRange(); });
+  elGrow.addEventListener('input', function(){ var r = val(elGrow); if (isFinite(r.v)) { elGrowR.value = Math.min(100, Math.max(0, r.v)); paintRange(); } });
+  paintRange();
+  /* ---- calculations ---- */
+  function readLoad(){
+    var p = parseInt(radio('tc-ph'), 10) || 3, k = (p === 3 ? SQ3 : 1), lt = radio('tc-lt');
+    var out = { p: p, k: k, lt: lt, missing: [], kva: NaN, cur: NaN, V: NaN, pf: NaN, g: 0, L: NaN };
+    var L = val(elLoad), lerr = '';
+    if (L.empty) { out.missing.push(lt === 'amps' ? 'your load current' : 'your load'); if (touched['tc-load']) { lerr = 'Enter your load to see results.'; } }
+    else if (!(L.v > 0)) { lerr = 'Enter a number greater than 0.'; }
+    else { out.L = L.v; }
+    var vc = checkVolt(elVolt, lt === 'amps');
+    setErr(elVolt, vc.err);
+    out.V = vc.v;
+    if (lt === 'amps') { if (val(elVolt).empty) { out.missing.push('the supply voltage'); } }
+    if (lt === 'kw') {
+      var pf = val(elPf);
+      if (pf.empty || !(pf.v >= 0.5) || pf.v > 1) { setErr(elPf, 'Enter a power factor between 0.5 and 1. Keep 0.9 if you\'re not sure.'); }
+      else { setErr(elPf, ''); out.pf = pf.v; }
+    } else { setErr(elPf, ''); }
+    if (radio('tc-gr') === 'yes') {
+      var g = val(elGrow);
+      if (g.empty || !(g.v >= 0) || g.v > 200) { setErr(elGrow, 'Enter a growth allowance between 0% and 200%.'); out.gBad = true; }
+      else { setErr(elGrow, ''); out.g = g.v; }
+    } else { setErr(elGrow, ''); }
+    if (isFinite(out.L)) {
+      if (lt === 'kva') { out.kva = out.L; }
+      else if (lt === 'kw') { out.kva = out.L / out.pf; }
+      else { out.kva = out.V * out.L * k / 1000; }
+    }
+    if (isFinite(out.kva)) {
+      if (out.kva > MAX_KVA) { lerr = 'That\'s above what this tool sizes (100,000 kVA). Talk to our engineers about large loads.'; out.kva = NaN; }
+    }
+    setErr(elLoad, lerr);
+    if (isFinite(out.kva)) {
+      out.cur = lt === 'amps' ? out.L : (isFinite(out.V) ? out.kva * 1000 / (out.V * k) : NaN);
+    }
+    out.ok = isFinite(out.kva) ? !out.gBad : false;
+    out.req = out.kva * (1 + out.g / 100);
+    return out;
+  }
+  function nextRatings(req, p, n){
+    var list = RATINGS[p];
+    for (var i = 0; list.length > i; i++) { if (list[i] >= req) { return list.slice(i, i + n); } }
+    return [];
+  }
+  function loadText(d){
+    if (d.lt === 'kva') { return fmtKva(d.L); }
+    if (d.lt === 'kw') { return fmt(d.L, 2) + ' kW at ' + fmt(d.pf, 2) + ' PF'; }
+    return fmtA(d.L);
+  }
+  function listText(arr){ return arr.map(function(r){ return fmt(r, 1); }).join(' or ') + ' kVA'; }
+  function loadAssume(d){
+    return '60 Hz; your entered load' + (isFinite(d.V) ? ' and voltage' : '') + (d.lt === 'kw' ? ' and power factor' : '') + (d.g > 0 ? '; ' + fmt(d.g, 0) + '% growth allowance' : '') + '; no allowance for motor starting, harmonics or other project-specific conditions.';
+  }
+  function loadInputs(d){
+    var rows = [['Calculation', MODE_LABEL[mode]], ['Phase', cap(phaseWord(d.p))], ['Load', loadText(d)], ['Supply voltage', isFinite(d.V) ? fmtV(d.V) + ' line-to-line' : 'Not entered']];
+    rows.push(['Growth allowance', d.g > 0 ? fmt(d.g, 0) + '%' : 'None']);
+    return rows;
+  }
+  function currentTile(d){
+    if (d.lt === 'amps') { return { k: 'Load current', v: fmtA(d.cur), s: 'at ' + fmtV(d.V) + ', ' + phaseWord(d.p) }; }
+    if (isFinite(d.cur)) { return { k: 'Calculated current', v: fmtA(d.cur), s: 'at ' + fmtV(d.V) + ', ' + phaseWord(d.p) }; }
+    return { k: 'Calculated current', v: '—', s: 'Add a supply voltage to calculate' };
+  }
+  function calcSize(){
+    var d = readLoad();
+    if (!d.ok) {
+      return { valid: false, tiles: [{ k: 'Estimated load', v: '—' }, { k: 'Ratings to review', v: '—', key: true }],
+        msg: d.missing.length ? 'Enter ' + d.missing.join(' and ') + ' to see results.' : 'Fix the highlighted field to see results.' };
+    }
+    var tiles = [{ k: 'Estimated load', v: fmtKva(d.kva), s: d.lt === 'kva' ? 'as entered' : 'from ' + loadText(d) }];
+    tiles.push(currentTile(d));
+    if (d.g > 0) { tiles.push({ k: 'With ' + fmt(d.g, 0) + '% growth', v: fmtKva(d.req), s: 'capacity to plan for' }); }
+    var picks = nextRatings(d.req, d.p, 2);
+    var max = RATINGS[d.p][RATINGS[d.p].length - 1];
+    var R = { mode: 'size', p: d.p, inputs: loadInputs(d), results: [], assume: loadAssume(d), sv: d.V };
+    if (picks.length) {
+      tiles.push({ k: 'Common ratings to review', v: listText(picks), s: 'Next standard ' + phaseWord(d.p) + ' ratings at or above ' + fmtKva(d.req), key: true });
+      R.unit = picks[0];
+    } else {
+      tiles.push({ k: 'Common ratings to review', v: 'Over ' + fmt(max, 0) + ' kVA', s: 'Talk to our engineers about a custom unit or multiple transformers', key: true });
+      R.unit = null; R.over = true;
+    }
+    tiles.forEach(function(t){ R.results.push([t.k, t.v + (t.s ? ' (' + t.s + ')' : '')]); });
+    R.sa = (R.unit ? (isFinite(d.V) ? R.unit * 1000 / (d.V * d.k) : NaN) : NaN);
+    R.carry = [MODE_LABEL.size, cap(phaseWord(d.p)), 'Load ' + fmtKva(d.kva)].concat(isFinite(d.V) ? [fmtV(d.V)] : []).concat(d.g > 0 ? ['+' + fmt(d.g, 0) + '% growth'] : []).concat(picks.length ? ['Review ' + listText(picks)] : []);
+    R.params = { calc_mode: 'size', phase: d.p, load: d.L, load_unit: d.lt, voltage: isFinite(d.V) ? d.V : '', power_factor: d.lt === 'kw' ? d.pf : '', growth_pct: d.g, est_kva: Math.round(d.kva * 100) / 100, ratings: picks.join(','), kva: picks.length ? picks[0] : '' };
+    return { valid: true, tiles: tiles, assume: d.assume, R: R };
+  }
+  function autoPicks(d){
+    if (!d.ok) { return []; }
+    var list = RATINGS[d.p], i = -1;
+    for (var n = 0; list.length > n; n++) { if (list[n] >= d.req) { i = n; break; } }
+    if (i === -1) { return list.slice(-2); }
+    return list.slice(Math.max(0, i - 1), i + 2).slice(0, 3);
+  }
+  function currentPicks(d){ return userPicks ? userPicks.slice() : autoPicks(d); }
+  function renderChips(d){
+    var picks = currentPicks(d);
+    if (picksEl.getAttribute('data-ph') === String(d.p)) {
+      $$('[data-pick]').forEach(function(b){ b.setAttribute('aria-pressed', picks.indexOf(parseFloat(b.getAttribute('data-pick'))) > -1 ? 'true' : 'false'); });
+      return;
+    }
+    picksEl.setAttribute('data-ph', String(d.p));
+    picksEl.innerHTML = RATINGS[d.p].map(function(r){
+      return '<button type="button" class="tc-chip" data-pick="' + r + '" aria-pressed="' + (picks.indexOf(r) > -1 ? 'true' : 'false') + '">' + fmt(r, 1) + ' kVA</button>';
+    }).join('');
+  }
+  function fitFor(pct){
+    if (pct > 100) { return ['Undersized', 'tc-b-under']; }
+    if (pct > 90) { return ['Tight fit', 'tc-b-tight']; }
+    if (pct >= 50) { return ['Good fit', 'tc-b-good']; }
+    return ['Lots of headroom', 'tc-b-room'];
+  }
+  function calcCompare(){
+    var d = readLoad();
+    renderChips(d);
+    var picks = currentPicks(d).sort(function(a, b){ return a - b; });
+    if (!d.ok) {
+      return { valid: false, tiles: [{ k: 'Estimated load', v: '—' }, { k: 'Calculated current', v: '—' }],
+        msg: d.missing.length ? 'Enter ' + d.missing.join(' and ') + ' to compare ratings.' : 'Fix the highlighted field to see results.' };
+    }
+    var tiles = [{ k: 'Estimated load', v: fmtKva(d.kva), s: d.lt === 'kva' ? 'as entered' : 'from ' + loadText(d) }, currentTile(d)];
+    if (d.g > 0) { tiles.push({ k: 'With ' + fmt(d.g, 0) + '% growth', v: fmtKva(d.req), s: 'capacity to plan for' }); }
+    if (!picks.length) {
+      return { valid: false, tiles: tiles, msg: 'Pick at least one rating to compare.' };
+    }
+    var rows = picks.map(function(r){
+      var pct = d.req / r * 100;
+      var f = fitFor(pct);
+      return { r: r, pct: pct, fit: f[0], cls: f[1], fla: isFinite(d.V) ? r * 1000 / (d.V * d.k) : NaN, spare: r - d.req };
+    });
+    var R = { mode: 'compare', p: d.p, inputs: loadInputs(d).concat([['Ratings compared', picks.map(function(r){ return fmt(r, 1); }).join(', ') + ' kVA']]), results: [], assume: loadAssume(d), sv: d.V, rows: rows };
+    tiles.forEach(function(t){ R.results.push([t.k, t.v + (t.s ? ' (' + t.s + ')' : '')]); });
+    var good = rows.filter(function(x){ return 100 >= x.pct; });
+    R.unit = good.length ? good[0].r : rows[rows.length - 1].r;
+    R.sa = isFinite(d.V) ? R.unit * 1000 / (d.V * d.k) : NaN;
+    R.carry = [MODE_LABEL.compare, cap(phaseWord(d.p)), 'Load ' + fmtKva(d.req)].concat(isFinite(d.V) ? [fmtV(d.V)] : []).concat(['Comparing ' + listText(picks)]);
+    R.params = { calc_mode: 'compare', phase: d.p, load: d.L, load_unit: d.lt, voltage: isFinite(d.V) ? d.V : '', power_factor: d.lt === 'kw' ? d.pf : '', growth_pct: d.g, est_kva: Math.round(d.kva * 100) / 100, ratings: picks.join(','), kva: R.unit };
+    var label = d.g > 0 ? 'Loading with growth' : 'Loading';
+    var html = '<p class="tc-cmp-h">Ratings side by side</p>' + rows.map(function(x){
+      return '<div class="tc-stat tc-glass tc-cmp-row"><div class="tc-cmp-top"><span class="tc-cmp-r">' + fmt(x.r, 1) + ' kVA</span><span class="tc-badge ' + x.cls + '">' + x.fit + '</span></div>' +
+        '<div class="tc-bar' + (x.pct > 100 ? ' tc-over' : '') + '"><i style="width:' + Math.min(100, x.pct).toFixed(1) + '%"></i></div>' +
+        '<div class="tc-cmp-m"><span>' + label + '<b>' + fmt(x.pct, 0) + '%</b></span><span>' + (x.spare >= 0 ? 'Spare capacity' : 'Short by') + '<b>' + fmtKva(Math.abs(x.spare)) + '</b></span><span>Full-load current<b>' + (isFinite(x.fla) ? fmtA(x.fla) : '—') + '</b></span></div></div>';
+    }).join('');
+    return { valid: true, tiles: tiles, cmp: html, R: R, msg: isFinite(d.V) ? '' : 'Add a supply voltage to see full-load current for each rating.' };
+  }
+  function calcAmps(){
+    var p = parseInt(radio('tc-ph'), 10) || 3, k = (p === 3 ? SQ3 : 1), unit = radio('tc-ru');
+    var missing = [], rerr = '', kva = NaN;
+    var r = val(elRating);
+    if (r.empty) { missing.push('the transformer rating'); if (touched['tc-rating']) { rerr = 'Enter the transformer rating from the nameplate.'; } }
+    else if (!(r.v > 0)) { rerr = 'Enter a rating greater than 0.'; }
+    else {
+      kva = unit === 'mva' ? r.v * 1000 : r.v;
+      if (kva > MAX_KVA) { rerr = 'Enter a rating up to 100 MVA (100,000 kVA).'; kva = NaN; }
+      else if (unit === 'kva') { if (r.v >= 0.1) { if (1 > r.v) { rerr = 'That looks like MVA. Switch the unit to MVA, or enter kVA.'; kva = NaN; } } }
+    }
+    setErr(elRating, rerr);
+    var pc = checkVolt(elPv, true), sc = checkVolt(elSv, true);
+    if (val(elPv).empty) { missing.push('the primary voltage'); }
+    if (val(elSv).empty) { missing.push('the secondary voltage'); }
+    if (isFinite(pc.v)) { if (pc.v === sc.v) { sc.err = 'Secondary voltage matches the primary. Check your entries.'; sc.v = NaN; } }
+    setErr(elPv, pc.err); setErr(elSv, sc.err);
+    var ok = isFinite(kva) ? (isFinite(pc.v) ? isFinite(sc.v) : false) : false;
+    if (!ok) {
+      var msg = missing.length ? 'Enter ' + (missing.length > 1 ? missing.slice(0, -1).join(', ') + ' and ' + missing[missing.length - 1] : missing[0]) + ' to see results.' : 'Fix the highlighted field to see results.';
+      return { valid: false, tiles: [{ k: 'Primary full-load current', v: '—', key: true }, { k: 'Secondary full-load current', v: '—', key: true }], msg: msg };
+    }
+    var pa = kva * 1000 / (pc.v * k), sa = kva * 1000 / (sc.v * k);
+    var conP = p === 3 ? elPc.value : 'unsure', conS = p === 3 ? elSc.value : 'unsure';
+    var ratioTile;
+    if (p === 1) {
+      ratioTile = { k: 'Turns ratio', v: fmt(pc.v / sc.v, 2) + ' : 1', s: 'Single-phase: equal to the voltage ratio' };
+    } else if (conP !== 'unsure' ? conS !== 'unsure' : false) {
+      var wp = conP === 'delta' ? pc.v : pc.v / SQ3, ws = conS === 'delta' ? sc.v : sc.v / SQ3;
+      ratioTile = { k: 'Winding turns ratio', v: fmt(wp / ws, 2) + ' : 1', s: cap(conP) + ' primary, ' + conS + ' secondary' };
+    } else {
+      ratioTile = { k: 'Voltage ratio', v: fmt(pc.v / sc.v, 2) + ' : 1', s: fmtV(pc.v) + ' : ' + fmtV(sc.v) + ' line-to-line. Add both connections for the turns ratio.' };
+    }
+    var ratingText = unit === 'mva' ? fmt(r.v, 3) + ' MVA (' + fmtKva(kva) + ')' : fmtKva(kva);
+    var tiles = [
+      { k: 'Primary full-load current', v: fmtA(pa), s: 'at ' + fmtV(pc.v) + ', ' + phaseWord(p), key: true },
+      { k: 'Secondary full-load current', v: fmtA(sa), s: 'at ' + fmtV(sc.v) + ', ' + phaseWord(p), key: true },
+      { k: 'Transformer rating', v: unit === 'mva' ? fmt(r.v, 3) + ' MVA' : fmtKva(kva), s: unit === 'mva' ? '= ' + fmtKva(kva) : phaseWord(p) },
+      ratioTile
+    ];
+    var conText = p === 3 ? (conP === 'unsure' ? 'not specified' : conP) + ' primary, ' + (conS === 'unsure' ? 'not specified' : conS) + ' secondary' : 'n/a';
+    var R = { mode: 'amps', p: p, unit: kva, sv: sc.v, pv: pc.v, sa: sa, results: [],
+      inputs: [['Calculation', MODE_LABEL.amps], ['Phase', cap(phaseWord(p))], ['Transformer rating', ratingText], ['Primary voltage', fmtV(pc.v) + ' line-to-line'], ['Secondary voltage', fmtV(sc.v) + ' line-to-line']].concat(p === 3 ? [['Connections', cap(conText)]] : []),
+      assume: '60 Hz; nameplate rating at full load; ' + (p === 3 ? 'balanced three-phase load; ' : '') + 'line-to-line voltages as entered.' };
+    tiles.forEach(function(t){ R.results.push([t.k, t.v + (t.s ? ' (' + t.s + ')' : '')]); });
+    R.carry = [MODE_LABEL.amps, cap(phaseWord(p)), fmtKva(kva), fmtV(pc.v) + ' : ' + fmtV(sc.v)];
+    R.params = { calc_mode: 'amps', phase: p, kva: kva, rating: r.v, rating_unit: unit, primary_v: pc.v, secondary_v: sc.v, primary_conn: conP, secondary_conn: conS };
+    return { valid: true, tiles: tiles, assume: R.assume, R: R };
+  }
+  /* ---- render ---- */
+  function tileHtml(t){
+    return '<div class="tc-stat tc-glass' + (t.key ? ' tc-key' : '') + '"><div class="tc-stat-k">' + esc(t.k) + '</div><div class="tc-stat-v">' + esc(t.v) + '</div>' + (t.s ? '<div class="tc-stat-s">' + esc(t.s) + '</div>' : '') + '</div>';
+  }
+  function layoutRows(){
+    var vis = Array.prototype.slice.call(tilesEl.children);
+    vis.forEach(function(c){ c.classList.remove('tc-span'); });
+    if (vis.length % 2 === 1) { vis[vis.length - 1].classList.add('tc-span'); }
+  }
+  function fitValues(){
+    $$('.tc-stat-v').forEach(function(v){
+      v.style.fontSize = '';
+      v.style.whiteSpace = '';
+      if (v.offsetParent === null) { return; }
+      var size = parseFloat(getComputedStyle(v).fontSize);
+      while (v.scrollWidth > v.clientWidth + 1) {
+        if (18 >= size) { v.style.whiteSpace = 'normal'; v.style.fontSize = '22px'; break; }
+        size = size - 1;
+        v.style.fontSize = size + 'px';
+      }
+    });
+  }
+  function update(){
+    var p = parseInt(radio('tc-ph'), 10) || 3, lt = radio('tc-lt');
+    $$('[data-modes]').forEach(function(el){ el.hidden = (' ' + el.getAttribute('data-modes') + ' ').indexOf(' ' + mode + ' ') === -1; });
+    $$('[data-kw-only]').forEach(function(el){ if (mode !== 'amps') { el.hidden = lt !== 'kw'; } });
+    $$('[data-3ph-only]').forEach(function(el){ if (mode === 'amps') { el.hidden = p !== 3; } });
+    $('[data-grow-row]').hidden = radio('tc-gr') !== 'yes';
+    $('#tc-load-lbl').textContent = lt === 'kva' ? 'Load (kVA)' : (lt === 'kw' ? 'Load (kW)' : 'Load current (A)');
+    elLoad.placeholder = lt === 'kva' ? 'e.g. 750' : (lt === 'kw' ? 'e.g. 600' : 'e.g. 900');
+    $('#tc-volt-hint').textContent = lt === 'amps' ? 'line-to-line, required for amps' : 'optional, to calculate current';
+    var res = mode === 'amps' ? calcAmps() : (mode === 'compare' ? calcCompare() : calcSize());
+    tilesEl.innerHTML = res.tiles.map(tileHtml).join('');
+    cmpEl.hidden = !res.cmp;
+    cmpEl.innerHTML = res.cmp || '';
+    msgEl.textContent = res.msg || '';
+    if (res.valid) { assumeEl.innerHTML = '<b>Assumptions:</b> ' + esc(res.R.assume); } else { assumeEl.innerHTML = ''; }
+    nextEl.hidden = !res.valid;
+    last = res.valid ? res.R : null;
+    if (!last) { closeEmail(); }
+    layoutRows(); fitValues();
+    return res;
+  }
+  /* ---- anticipated needs (receipt + print) ---- */
+  var BRK = [100, 125, 150, 175, 200, 225, 250, 300, 350, 400, 450, 500, 600, 700, 800, 1000, 1200, 1600, 2000, 2500, 3000, 4000, 5000, 6000];
+  function buildNeeds(R){
+    var eq = [], te = [], en = [];
+    if (R) {
+      var ph = phaseWord(R.p), unit = R.unit;
+      if (R.over) { eq.push(['Custom transformer or multiple units', 'Load exceeds standard ' + ph + ' ratings']); }
+      else { eq.push([fmt(unit, 1) + ' kVA ' + ph + ' transformer', 'New, remanufactured or rental options']); }
+      if (isFinite(R.sa)) {
+        var need = R.sa * 1.25, br = null;
+        for (var i = 0; BRK.length > i; i++) { if (BRK[i] >= need) { br = BRK[i]; break; } }
+        eq.push(['Secondary main breaker or switchboard', br ? 'About ' + fmt(br, 0) + ' A frame (125% of ' + fmt(R.sa, 0) + ' A full load)' : 'Over 6,000 A: multiple sections required']);
+      }
+      var mv = R.mode === 'amps' ? R.pv > 1000 : (unit ? unit >= 300 : true);
+      if (mv) { eq.push(['Primary switchgear or fused load-break switch', 'Medium-voltage protection ahead of the transformer']); }
+      if (unit ? unit >= 750 : true) { eq.push(['Mobile substation or temporary power', 'If the site cannot take an outage during changeover']); }
+      te.push(['NETA acceptance testing', 'Before the unit is energized']);
+      te.push(['Insulation resistance, TTR and winding resistance', 'Confirms the unit arrived and installed in spec']);
+      if (unit ? unit >= 500 : true) { te.push(['Oil sampling and dissolved gas analysis', 'For liquid-filled units, at startup and on a schedule']); }
+      te.push(['Infrared thermography', 'After the unit is under load']);
+      en.push(['Short-circuit and coordination study', 'Sets breaker and relay settings for the new unit']);
+      en.push(['Arc flash study and labeling', 'Required when equipment or fault levels change']);
+      if (R.mode === 'amps') { en.push(['Utility coordination', 'Service voltage, metering and protection requirements']); }
+      else { en.push(['Load study', 'Verifies the load and growth allowance used for sizing']); }
+    } else {
+      eq.push(['Transformer sized to your load', 'Enter your details above for a specific size']);
+      eq.push(['Switchgear and breakers', 'Matched to the transformer\'s full-load current']);
+      te.push(['NETA acceptance and maintenance testing', 'Before energization and on a schedule']);
+      en.push(['Short-circuit, coordination and arc flash studies', 'Required when equipment changes']);
+    }
+    return { eq: eq, te: te, en: en };
+  }
+  function basisText(R){
+    if (!R) { return 'General planning list'; }
+    if (R.mode === 'amps') { return fmtKva(R.unit) + ' · ' + (R.p === 3 ? '3-phase' : '1-phase') + ' · ' + fmtV(R.pv) + ' / ' + fmtV(R.sv); }
+    return (R.over ? 'Large load' : fmt(R.unit, 1) + ' kVA') + ' · ' + (R.p === 3 ? '3-phase' : '1-phase') + (isFinite(R.sv) ? ' · ' + fmtV(R.sv) : '');
+  }
+  function stamp(){
+    var now = new Date();
+    return now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + ' ' + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+  function buildReceipt(R){
+    var n = buildNeeds(R);
+    function sec(title, items){ return '<p class="tc-r-sec">' + title + '</p><ul class="tc-r-list">' + items.map(function(x){ return '<li><div class="tc-r-item"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div></li>'; }).join('') + '</ul>'; }
+    return '<p class="tc-r-brand">Sunbelt Solomon</p><p class="tc-r-sub">Power needs summary</p>' +
+      '<div class="tc-r-meta"><span>' + esc(basisText(R)) + '</span><span>' + esc(stamp()) + '</span></div><hr class="tc-r-hr">' +
+      sec('Equipment', n.eq) + sec('Testing', n.te) + sec('Engineering', n.en) +
+      '<hr class="tc-r-hr"><div class="tc-r-next"><span>Next step</span><a class="tc-r-inv" data-inv href="' + esc(invUrl) + '"' + (linkTarget !== '_self' ? ' target="' + linkTarget + '" rel="noopener"' : '') + '>Check out inventory →</a></div>' +
+      '<p class="tc-r-fine">Planning estimate based on your inputs. Confirm availability and scope with our team.</p>';
+  }
+  var rwrap = $('.tc-rwrap'), paper = $('[data-receipt]'), resetT;
+  function resetReceipt(){
+    if (!rwrap.classList.contains('tc-printed')) { return; }
+    rwrap.classList.add('tc-resetting');
+    rwrap.classList.remove('tc-printed');
+    clearTimeout(resetT);
+    resetT = setTimeout(function(){ rwrap.classList.remove('tc-resetting'); paper.innerHTML = ''; }, 300);
+  }
+  $('[data-solve]').addEventListener('click', function(){
+    clearTimeout(resetT); rwrap.classList.remove('tc-resetting');
+    paper.innerHTML = buildReceipt(last);
+    rwrap.classList.remove('tc-printed');
+    void rwrap.offsetWidth;
+    rwrap.classList.add('tc-printed');
+    track('solve_click', { calc_mode: mode, kva: last ? last.unit : null });
+    var inv = $('[data-inv]');
+    if (inv) { inv.addEventListener('click', function(){ track('inventory_click', { href: invUrl }); }); }
+  });
+  /* ---- email + print ---- */
+  function pageUrl(){
+    var here = window.location.href.split('#')[0];
+    if (framed) { if (document.referrer) { return document.referrer.split('#')[0]; } }
+    return here;
+  }
+  function summaryText(R){
+    var L = ['Sunbelt Solomon transformer calculator', stamp(), '', 'YOUR INPUTS'];
+    R.inputs.forEach(function(r){ L.push(r[0] + ': ' + r[1]); });
+    L.push('', 'RESULTS');
+    R.results.forEach(function(r){ L.push(r[0] + ': ' + r[1]); });
+    if (R.rows) {
+      L.push('', 'RATINGS COMPARED');
+      R.rows.forEach(function(x){ L.push(fmt(x.r, 1) + ' kVA: ' + x.fit + ', ' + fmt(x.pct, 0) + '% loaded' + (isFinite(x.fla) ? ', ' + fmtA(x.fla) + ' full-load current' : '')); });
+    }
+    L.push('', 'Assumptions: ' + R.assume, '', 'These are planning estimates. Have a qualified engineer confirm the rating, connections and protection before you buy.');
+    L.push('', 'Calculator: ' + pageUrl());
+    if (phone) { L.push('Questions? Call ' + phone); }
+    return L.join('\n');
+  }
+  /* ---- email results: pop-up that sends the results, with a copy to marketing ---- */
+  var dlg = $('[data-email-dialog]'), emForm = $('[data-email-form]'), emName = $('#tc-em-name'), emAddr = $('#tc-em-email');
+  var emSend = $('[data-email-send]'), emStatus = $('[data-email-status]');
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  function resultsHtml(R){
+    function rows(list){ return list.map(function(r){ return '<tr><td style="padding:7px 12px 7px 0;color:#4A4F5C;vertical-align:top;width:40%">' + esc(r[0]) + '</td><td style="padding:7px 0;color:#141B4D;font-weight:600">' + esc(r[1]) + '</td></tr>'; }).join(''); }
+    var h = '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#141B4D">';
+    h += '<p style="margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0047BB">Your inputs</p><table style="border-collapse:collapse;width:100%">' + rows(R.inputs) + '</table>';
+    h += '<p style="margin:18px 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0047BB">Results</p><table style="border-collapse:collapse;width:100%">' + rows(R.results) + '</table>';
+    if (R.rows) {
+      h += '<p style="margin:18px 0 6px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0047BB">Ratings compared</p><table style="border-collapse:collapse;width:100%">' +
+        rows(R.rows.map(function(x){ return [fmt(x.r, 1) + ' kVA', x.fit + ', ' + fmt(x.pct, 0) + '% loaded' + (isFinite(x.fla) ? ', ' + fmtA(x.fla) + ' full-load current' : '')]; })) + '</table>';
+    }
+    h += '<p style="margin:18px 0 0;color:#4A4F5C"><b>Assumptions:</b> ' + esc(R.assume) + '</p>';
+    h += '<p style="margin:12px 0 0;color:#4A4F5C">These are planning estimates. Have a qualified engineer confirm the rating, connections and protection before you buy.</p></div>';
+    return h;
+  }
+  function telHref(){ return 'tel:' + phone.replace(/[^0-9+]/g, ''); }
+  function emailHtml(R, name){
+    var h = '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.55;color:#141B4D;max-width:600px">';
+    h += '<p style="margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#0047BB">Sunbelt Solomon</p>';
+    h += '<p style="margin:0 0 18px">Hi ' + esc(name || 'there') + ', here are your transformer calculator results.</p>';
+    h += resultsHtml(R);
+    if (phone) { h += '<p style="margin:20px 0 0">Questions? Call <a href="' + esc(telHref()) + '" style="color:#0047BB;font-weight:700">' + esc(phone) + '</a>.</p>'; }
+    if (contactUrl) {
+      h += '<p style="margin:20px 0 0"><a href="' + esc(contactUrl) + '" style="display:inline-block;background:#F16723;color:#141B4D;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:6px">Contact us</a></p>';
+    }
+    h += '</div>';
+    return h;
+  }
+  function emailText(R, name){
+    var L = ['Hi ' + (name || 'there') + ', here are your transformer calculator results.', '', summaryText(R)];
+    if (contactUrl) { L.push('Contact us: ' + contactUrl); }
+    return L.join('\n');
+  }
+  function mailtoLink(to){
+    return 'mailto:' + encodeURIComponent(to) + '?' + (copyEmail ? 'cc=' + encodeURIComponent(copyEmail) + '&' : '') +
+      'subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailText(last, emName.value.trim()));
+  }
+  function setStatus(kind, html){
+    emStatus.className = 'tc-dialog-status' + (kind ? ' tc-' + kind : '');
+    emStatus.innerHTML = html || '';
+    setTimeout(placeDialog, 0);
+  }
+  /* inside an auto-sized iframe the frame is as tall as the calculator, so keep the pop-up beside the button the visitor clicked */
+  function placeDialog(){
+    if (!framed) { return; }
+    if (!dlg.open) { return; }
+    var r = $('[data-email]').getBoundingClientRect();
+    var dh = dlg.offsetHeight || 520;
+    var top = Math.round(r.top + r.height / 2 - dh / 2);
+    top = Math.min(top, window.innerHeight - dh - 16);
+    dlg.style.marginTop = Math.max(16, top) + 'px';
+    dlg.style.marginBottom = 'auto';
+  }
+  function showSent(done){
+    $('.tc-dialog-fields').hidden = done;
+    $('[data-email-carry]').hidden = done;
+    emSend.hidden = done;
+    $('.tc-dialog-actions [data-email-close]').textContent = done ? 'Close' : 'Cancel';
+  }
+  function openEmail(){
+    if (!last) { return; }
+    $('[data-email-carry]').innerHTML = last.carry.map(function(t){ return '<li>' + esc(t) + '</li>'; }).join('');
+    setStatus('', ''); setErr(emAddr, ''); showSent(false);
+    emSend.disabled = false; emSend.textContent = 'Send my results';
+    emForm.hidden = false;
+    if (dlg.showModal) { if (!dlg.open) { dlg.showModal(); } } else { dlg.setAttribute('open', ''); }
+    placeDialog();
+    setTimeout(function(){ emAddr.focus(); }, 30);
+    track('email_open', { calc_mode: mode });
+  }
+  function closeEmail(){
+    if (!dlg) { return; }
+    if (dlg.open) { if (dlg.close) { dlg.close(); } else { dlg.removeAttribute('open'); } }
+  }
+  $('[data-email]').addEventListener('click', openEmail);
+  $$('[data-email-close]').forEach(function(b){ b.addEventListener('click', closeEmail); });
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) { closeEmail(); } });
+  emAddr.addEventListener('input', function(){ if (EMAIL_RE.test(emAddr.value.trim())) { setErr(emAddr, ''); } });
+  emForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!last) { return; }
+    var to = emAddr.value.trim(), name = emName.value.trim();
+    if (!EMAIL_RE.test(to)) { setErr(emAddr, 'Enter a valid email address, like name@company.com.'); emAddr.focus(); return; }
+    setErr(emAddr, '');
+    var fallback = '<a href="' + esc(mailtoLink(to)) + '"' + (framed ? ' target="_top"' : '') + '>open them in your email app</a>';
+    if (!ejs.key || !ejs.service || !ejs.template) {
+      /* no sending service set up yet: hand off to the visitor's email app, addressed to them with a copy to marketing */
+      setStatus('ok', 'Your email app is opening with your results addressed to <b>' + esc(to) + '</b>. Press Send there to finish. If nothing opens, ' + fallback + '.');
+      track('email_sent', { calc_mode: mode, method: 'email_app' });
+      go(mailtoLink(to));
+      return;
+    }
+    emSend.disabled = true; emSend.textContent = 'Sending…';
+    setStatus('', '');
+    var params = {
+      to_email: to, to_name: name || 'there', copy_email: copyEmail, subject: emailSubject,
+      message_html: emailHtml(last, name), message_text: emailText(last, name), results_html: resultsHtml(last),
+      phone: phone, contact_url: contactUrl, calc_mode: MODE_LABEL[mode], page_url: pageUrl()
+    };
+    fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ service_id: ejs.service, template_id: ejs.template, user_id: ejs.key, template_params: params })
+    }).then(function(res){
+      if (!res.ok) { throw new Error('status ' + res.status); }
+      showSent(true);
+      setStatus('ok', 'Sent. Check <b>' + esc(to) + '</b> for your results in the next few minutes.');
+      track('email_sent', { calc_mode: mode, method: 'emailjs' });
+    }).catch(function(err){
+      emSend.disabled = false; emSend.textContent = 'Try again';
+      setStatus('fail', 'We couldn\'t send your results right now. Try again in a minute, or ' + fallback + (phone ? '. You can also call ' + esc(phone) + '.' : '.'));
+      track('email_error', { calc_mode: mode, error: String(err ? (err.message || err) : 'unknown') });
+    });
+  });
+  function printDoc(R){
+    var n = buildNeeds(R);
+    function table(rows){ return '<table>' + rows.map(function(r){ return '<tr><th>' + esc(r[0]) + '</th><td>' + esc(r[1]) + '</td></tr>'; }).join('') + '</table>'; }
+    function needs(title, items){ return '<h3>' + title + '</h3><ul>' + items.map(function(x){ return '<li><b>' + esc(x[0]) + '</b> — ' + esc(x[1]) + '</li>'; }).join('') + '</ul>'; }
+    var cmp = '';
+    if (R.rows) {
+      cmp = '<h2>Ratings compared</h2><table class="cmp"><tr><th>Rating</th><th>Fit</th><th>Loading</th><th>Spare capacity</th><th>Full-load current</th></tr>' + R.rows.map(function(x){
+        return '<tr><td>' + fmt(x.r, 1) + ' kVA</td><td>' + x.fit + '</td><td>' + fmt(x.pct, 0) + '%</td><td>' + (x.spare >= 0 ? '' : '-') + fmtKva(Math.abs(x.spare)) + '</td><td>' + (isFinite(x.fla) ? fmtA(x.fla) : '—') + '</td></tr>';
+      }).join('') + '</table>';
+    }
+    var css = 'body{font-family:"DM Sans",Arial,Helvetica,sans-serif;color:#141B4D;margin:0;padding:36px 44px;font-size:13px;line-height:1.5}' +
+      '.top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #0047BB;padding-bottom:12px;margin-bottom:18px}' +
+      '.brand{font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:13px}h1{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;font-size:36px;line-height:1;margin:6px 0 0;letter-spacing:.01em}' +
+      '.date{color:#5b6475;font-size:12px}h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#0047BB;margin:20px 0 8px}' +
+      'h3{font-size:13px;margin:12px 0 4px}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:7px 10px;border-bottom:1px solid #DBDBD9;vertical-align:top}' +
+      'th{width:34%;color:#4a4f5c;font-weight:600}.cmp th{width:auto;background:#F9F9FB}ul{margin:0;padding-left:18px}li{margin:3px 0}' +
+      '.note{margin-top:20px;padding:12px 14px;border-left:4px solid #F16723;background:#F9F9FB}.foot{margin-top:22px;color:#5b6475;font-size:12px}' +
+      '@page{margin:12mm}';
+    return '<!doctype html><html><head><meta charset="utf-8"><title>Transformer calculator summary</title>' +
+      '<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet"><style>' + css + '</style></head><body>' +
+      '<div class="top"><div><div class="brand">Sunbelt Solomon</div><h1>Transformer calculator summary</h1></div><div class="date">' + esc(stamp()) + '</div></div>' +
+      '<h2>Your inputs</h2>' + table(R.inputs) + '<h2>Results</h2>' + table(R.results) + cmp +
+      '<h2>Assumptions</h2><p>' + esc(R.assume) + '</p>' +
+      '<h2>What this project may also need</h2>' + needs('Equipment', n.eq) + needs('Testing', n.te) + needs('Engineering', n.en) +
+      '<div class="note"><b>Engineering review recommended.</b> These are planning estimates. Have a qualified engineer confirm the rating, connections and protection before you buy.</div>' +
+      '<p class="foot">' + (phone ? 'Questions? Call ' + esc(phone) + ' · ' : '') + esc(pageUrl()) + '</p></body></html>';
+  }
+  $('[data-print]').addEventListener('click', function(){
+    if (!last) { return; }
+    track('print_click', { calc_mode: mode });
+    var old = document.getElementById('tcalc-print-frame');
+    if (old) { old.parentNode.removeChild(old); }
+    var f = document.createElement('iframe');
+    f.id = 'tcalc-print-frame';
+    f.setAttribute('aria-hidden', 'true');
+    f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+    document.body.appendChild(f);
+    var doc = f.contentWindow.document;
+    doc.open(); doc.write(printDoc(last)); doc.close();
+    var printed = false;
+    function go(){ if (printed) { return; } printed = true; f.contentWindow.focus(); f.contentWindow.print(); }
+    if (doc.fonts) { if (doc.fonts.ready) { doc.fonts.ready.then(function(){ setTimeout(go, 150); }); } }
+    setTimeout(go, 1200);
+  });
+  /* ---- request a quote: straight to the quote form, carrying the visitor's selections ---- */
+  function quoteMessage(R){
+    var L = ['Transformer calculator: ' + MODE_LABEL[R.mode]];
+    R.inputs.forEach(function(r){ if (r[0] !== 'Calculation') { L.push(r[0] + ': ' + r[1]); } });
+    R.results.forEach(function(r){ L.push(r[0] + ': ' + r[1]); });
+    if (R.rows) { R.rows.forEach(function(x){ L.push(fmt(x.r, 1) + ' kVA: ' + x.fit + ', ' + fmt(x.pct, 0) + '% loaded'); }); }
+    return L.join('\n');
+  }
+  $('[data-quote]').addEventListener('click', function(){
+    var q = {};
+    if (last) {
+      q.message = quoteMessage(last);
+      Object.keys(last.params).forEach(function(k){ if (last.params[k] !== '') { q[k] = last.params[k]; } });
+    }
+    q.source = 'transformer-calculator';
+    var qs = Object.keys(q).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(q[k]); }).join('&');
+    track('quote_click', { calc_mode: mode, kva: q.kva || null });
+    go(quoteUrl + (quoteUrl.indexOf('?') === -1 ? '?' : '&') + qs);
+  });
+  /* ---- mode switching ---- */
+  function setMode(m, silent){
+    mode = m;
+    $$('.tc-mode').forEach(function(b){ b.setAttribute('aria-checked', b.getAttribute('data-mode') === m ? 'true' : 'false'); });
+    closeEmail(); resetReceipt(); update();
+    if (!silent) { track('mode_select', { calc_mode: m }); }
+  }
+  $$('.tc-mode').forEach(function(b){
+    b.addEventListener('click', function(){ setMode(b.getAttribute('data-mode')); });
+    b.addEventListener('keydown', function(e){
+      var keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+      if (!keys[e.key]) { return; }
+      e.preventDefault();
+      var all = $$('.tc-mode'), i = all.indexOf(b) + keys[e.key];
+      if (0 > i) { i = all.length - 1; }
+      if (i >= all.length) { i = 0; }
+      all[i].focus(); setMode(all[i].getAttribute('data-mode'));
+    });
+  });
+  /* ---- events ---- */
+  picksEl.addEventListener('click', function(e){
+    var b = e.target.closest('[data-pick]');
+    if (!b) { return; }
+    var r = parseFloat(b.getAttribute('data-pick'));
+    var d = readLoad();
+    var picks = currentPicks(d), i = picks.indexOf(r);
+    if (i > -1) { picks.splice(i, 1); }
+    else { picks.push(r); if (picks.length > 3) { picks.shift(); } }
+    userPicks = picks;
+    resetReceipt(); update();
+  });
+  var lastPhase = radio('tc-ph');
+  calcForm.addEventListener('input', function(){ resetReceipt(); update(); });
+  calcForm.addEventListener('change', function(e){
+    if (e.target.name === 'tc-ph') { if (radio('tc-ph') !== lastPhase) { lastPhase = radio('tc-ph'); userPicks = null; } }
+    resetReceipt();
+    var res = update();
+    if (res.valid) { track('calculate', { calc_mode: mode, kva: last.unit }); }
+  });
+  calcForm.addEventListener('focusout', function(e){
+    if (e.target.id) { if (e.target.tagName === 'INPUT') { touched[e.target.id] = true; setTimeout(update, 130); } }
+  });
+  var rzT;
+  window.addEventListener('resize', function(){ clearTimeout(rzT); rzT = setTimeout(fitValues, 120); });
+  if (document.fonts) { if (document.fonts.ready) { document.fonts.ready.then(fitValues); } }
+  setMode('size', true);
+  root.classList.add('tc-ready');
+  /* when embedded in an iframe, tell the host page how tall the calculator is so the frame never scrolls */
+  if (framed) {
+    var lastH = 0;
+    var sendHeight = function(){
+      var h = Math.ceil(document.body.getBoundingClientRect().height);
+      if (h === lastH) { return; }
+      lastH = h;
+      try { window.parent.postMessage({ type: 'sbs-tc-height', height: h }, '*'); } catch (e) {}
+    };
+    if (window.ResizeObserver) { new ResizeObserver(sendHeight).observe(document.body); }
+    window.addEventListener('load', sendHeight);
+    root.addEventListener('transitionend', sendHeight);
+    setInterval(sendHeight, 1000);
+    sendHeight();
+  }
+})();
+</script></body></html>
